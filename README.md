@@ -43,6 +43,7 @@ This is a NodeJS project that will serve as the backend service for the Devathon
 
 ### TODO
 
+-   Add swagger config in readme instructions
 -   Centralize error handling
 -   Add docker
 -   Add logger

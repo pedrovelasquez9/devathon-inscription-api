@@ -8,4 +8,8 @@ const doc = {
 };
 
 const outputFile = "./docs/swagger-output.json";
-swaggerAutogen()(outputFile, ["./src/routes/role.ts"], doc);
+swaggerAutogen()(
+    outputFile,
+    ["./src/routes/role.ts", "./src/routes/seniority.ts"],
+    doc,
+);
