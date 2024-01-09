@@ -1,0 +1,74 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model developer {
+  id                 Int       @id @default(autoincrement())
+  fullname           String    @db.LongText
+  email              String    @db.VarChar(45)
+  github_link        String    @db.VarChar(45)
+  linkedin_link      String    @db.VarChar(45)
+  idrole             Int
+  ceremony_available Int       @db.TinyInt
+  discord_username   String    @db.VarChar(45)
+  idseniority        Int
+  looking_for_work   Int       @db.TinyInt
+  retire_probability Int       @db.TinyInt
+  condition_accepted Int       @db.TinyInt
+  idteam             Int
+  status             Int       @default(1) @db.TinyInt
+  created_by         String    @db.VarChar(45)
+  created_at         DateTime  @default(now()) @db.DateTime(0)
+  updated_by         String?   @db.VarChar(45)
+  updated_at         DateTime? @db.DateTime(0)
+  role               role      @relation(fields: [idrole], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "idrole")
+  seniority          seniority @relation(fields: [idseniority], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "idseniority")
+  team               team      @relation(fields: [idteam], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "idteam")
+
+  @@index([idrole], map: "idrole_idx")
+  @@index([idseniority], map: "idseniority_idx")
+  @@index([idteam], map: "idteam_idx")
+}
+
+model role {
+  id         Int         @id @default(autoincrement())
+  name       String      @db.VarChar(45)
+  status     Int         @default(1) @db.TinyInt
+  created_by String      @db.VarChar(45)
+  created_at DateTime    @default(now()) @db.DateTime(0)
+  updated_by String?     @db.VarChar(45)
+  updated_at DateTime?   @db.DateTime(0)
+  developer  developer[]
+}
+
+model seniority {
+  id         Int         @id @default(autoincrement())
+  name       String      @db.VarChar(45)
+  status     Int         @default(1) @db.TinyInt
+  created_by String      @db.VarChar(45)
+  created_at DateTime    @default(now()) @db.DateTime(0)
+  updated_by String?     @db.VarChar(45)
+  updated_at DateTime?   @db.DateTime(0)
+  developer  developer[]
+}
+
+model team {
+  id                       Int         @id @default(autoincrement())
+  name                     String      @db.VarChar(45)
+  stack_frontend           String      @db.LongText
+  stack_backend            String      @db.LongText
+  available_frontend_quota Int         @default(3)
+  available_backend_quota  Int         @default(3)
+  edition                  Int         @default(6)
+  status                   Int         @default(1) @db.TinyInt
+  created_by               String      @db.VarChar(45)
+  created_at               DateTime    @default(now()) @db.DateTime(0)
+  updated_by               String?     @db.VarChar(45)
+  updated_at               DateTime?   @db.DateTime(0)
+  developer                developer[]
+}
