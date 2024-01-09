@@ -1,6 +1,7 @@
 import express from "express";
-import { roleRoutes } from "./role";
-import { routerDocs } from "./api-docs";
+import { router as RoleRoutes } from "./role";
+import { router as DocsRoutes } from "./api-docs";
+import { router as SeniorityRoutes } from "./seniority";
 
 export const router = express.Router();
-router.use(roleRoutes, routerDocs);
+router.use(RoleRoutes, DocsRoutes, SeniorityRoutes);

@@ -7,9 +7,9 @@ import {
     getRoleByID,
 } from "../services/role";
 
-export const roleRoutes = Router();
+export const router = Router();
 
-roleRoutes.get("/role", async (request: Request, response: Response) => {
+router.get("/role", async (request: Request, response: Response) => {
     try {
         response.send(await getAllRoles());
     } catch (error) {
@@ -17,7 +17,7 @@ roleRoutes.get("/role", async (request: Request, response: Response) => {
     }
 });
 
-roleRoutes.get("/role/:id", async (request: Request, response: Response) => {
+router.get("/role/:id", async (request: Request, response: Response) => {
     try {
         const { id } = request.params;
         response.send(await getRoleByID(id));
@@ -26,7 +26,7 @@ roleRoutes.get("/role/:id", async (request: Request, response: Response) => {
     }
 });
 
-roleRoutes.post("/role", async (request: Request, response: Response) => {
+router.post("/role", async (request: Request, response: Response) => {
     try {
         const { body } = request;
         response.send(await createRole(body));
@@ -35,7 +35,7 @@ roleRoutes.post("/role", async (request: Request, response: Response) => {
     }
 });
 
-roleRoutes.patch("/role/:id", async (request: Request, response: Response) => {
+router.patch("/role/:id", async (request: Request, response: Response) => {
     try {
         const { id } = request.params;
         const { body } = request;
@@ -45,7 +45,7 @@ roleRoutes.patch("/role/:id", async (request: Request, response: Response) => {
     }
 });
 
-roleRoutes.delete("/role/:id", async (request: Request, response: Response) => {
+router.delete("/role/:id", async (request: Request, response: Response) => {
     try {
         const { id } = request.params;
         response.send(await deleteRole(id));
