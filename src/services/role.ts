@@ -1,14 +1,18 @@
 import prisma from "../client";
 import { Role, RoleData } from "../interfaces/Role";
+import { Status } from "../utils/constants";
+
+const prismaRoleModel = prisma.role;
+const roleResultFields = {
+    id: true,
+    name: true,
+};
 
 export const getAllRoles = async (): Promise<RoleData[]> => {
     try {
-        return await prisma.role.findMany({
-            where: { status: 1 },
-            select: {
-                id: true,
-                name: true,
-            },
+        return await prismaRoleModel.findMany({
+            where: { status: Status.Active },
+            select: roleResultFields,
         });
     } catch (error) {
         console.log(error);
@@ -18,16 +22,13 @@ export const getAllRoles = async (): Promise<RoleData[]> => {
 
 export const getRoleByID = async (id: string): Promise<RoleData | null> => {
     try {
-        const recordId = parseInt(id);
-        return await prisma.role.findUnique({
+        const roleRecordId = parseInt(id);
+        return await prismaRoleModel.findUnique({
             where: {
-                id: recordId,
-                status: 1,
+                id: roleRecordId,
+                status: Status.Active,
             },
-            select: {
-                id: true,
-                name: true,
-            },
+            select: roleResultFields,
         });
     } catch (error) {
         console.log(error);
@@ -37,7 +38,7 @@ export const getRoleByID = async (id: string): Promise<RoleData | null> => {
 
 export const createRole = async (roleData: Role): Promise<Role> => {
     try {
-        return await prisma.role.create({
+        return await prismaRoleModel.create({
             data: roleData,
         });
     } catch (error) {
@@ -49,7 +50,7 @@ export const createRole = async (roleData: Role): Promise<Role> => {
 export const editRole = async (roleData: Role, id: string): Promise<Role> => {
     try {
         const recordId = parseInt(id);
-        return await prisma.role.update({
+        return await prismaRoleModel.update({
             where: {
                 id: recordId,
             },
@@ -63,13 +64,13 @@ export const editRole = async (roleData: Role, id: string): Promise<Role> => {
 
 export const deleteRole = async (id: string): Promise<Role> => {
     try {
-        const recordId = parseInt(id);
-        return await prisma.role.update({
+        const roleRecordId = parseInt(id);
+        return await prismaRoleModel.update({
             where: {
-                id: recordId,
+                id: roleRecordId,
             },
             data: {
-                status: 0,
+                status: Status.Inactive,
             },
         });
     } catch (error) {

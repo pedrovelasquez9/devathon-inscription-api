@@ -1,14 +1,18 @@
 import prisma from "../client";
 import { Seniority, SeniorityData } from "../interfaces/Seniority";
+import { Status } from "../utils/constants";
+
+const prismaSeniorityModel = prisma.seniority;
+const seniorityResultFields = {
+    id: true,
+    name: true,
+};
 
 export const getAllSeniorities = async (): Promise<SeniorityData[]> => {
     try {
-        return await prisma.seniority.findMany({
-            where: { status: 1 },
-            select: {
-                id: true,
-                name: true,
-            },
+        return await prismaSeniorityModel.findMany({
+            where: { status: Status.Active },
+            select: seniorityResultFields,
         });
     } catch (error) {
         console.log(error);
@@ -20,16 +24,13 @@ export const getSeniorityByID = async (
     id: string,
 ): Promise<SeniorityData | null> => {
     try {
-        const recordId = parseInt(id);
-        return await prisma.seniority.findUnique({
+        const seniorityRecordId = parseInt(id);
+        return await prismaSeniorityModel.findUnique({
             where: {
-                id: recordId,
-                status: 1,
+                id: seniorityRecordId,
+                status: Status.Active,
             },
-            select: {
-                id: true,
-                name: true,
-            },
+            select: seniorityResultFields,
         });
     } catch (error) {
         console.log(error);
@@ -41,7 +42,7 @@ export const createSeniority = async (
     SeniorityData: Seniority,
 ): Promise<Seniority> => {
     try {
-        return await prisma.seniority.create({
+        return await prismaSeniorityModel.create({
             data: SeniorityData,
         });
     } catch (error) {
@@ -56,7 +57,7 @@ export const editSeniority = async (
 ): Promise<Seniority> => {
     try {
         const recordId = parseInt(id);
-        return await prisma.seniority.update({
+        return await prismaSeniorityModel.update({
             where: {
                 id: recordId,
             },
@@ -70,13 +71,13 @@ export const editSeniority = async (
 
 export const deleteSeniority = async (id: string): Promise<Seniority> => {
     try {
-        const recordId = parseInt(id);
-        return await prisma.seniority.update({
+        const seniorityRecordId = parseInt(id);
+        return await prismaSeniorityModel.update({
             where: {
-                id: recordId,
+                id: seniorityRecordId,
             },
             data: {
-                status: 0,
+                status: Status.Inactive,
             },
         });
     } catch (error) {
