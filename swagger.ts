@@ -14,6 +14,7 @@ swaggerAutogen()(
         "./src/routes/role.ts",
         "./src/routes/seniority.ts",
         "./src/routes/team.ts",
+        "./src/routes/developer.ts",
     ],
     doc,
 );

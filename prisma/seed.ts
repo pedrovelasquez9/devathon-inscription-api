@@ -34,6 +34,19 @@ async function main() {
             },
         ],
     });
+    await prisma.team.createMany({
+        data: [
+            {
+                name: "Equipo 1",
+                stack_backend: "Nodejs, express, postgresql, swagger, jest",
+                stack_frontend: "react, tailwind, jest",
+                available_backend_quota: 3,
+                available_frontend_quota: 3,
+                edition: 6,
+                created_by: "Pedro Plasencia",
+            },
+        ],
+    });
 }
 main()
     .then(async () => {
