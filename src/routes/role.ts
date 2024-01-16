@@ -9,7 +9,7 @@ import {
 
 export const router = Router();
 
-router.get("/role", async (request: Request, response: Response) => {
+router.get("/", async (request: Request, response: Response) => {
     try {
         response.send(await getAllRoles());
     } catch (error) {
@@ -17,7 +17,7 @@ router.get("/role", async (request: Request, response: Response) => {
     }
 });
 
-router.get("/role/:id", async (request: Request, response: Response) => {
+router.get("/:id", async (request: Request, response: Response) => {
     try {
         const { id } = request.params;
         response.send(await getRoleByID(id));
@@ -26,7 +26,7 @@ router.get("/role/:id", async (request: Request, response: Response) => {
     }
 });
 
-router.post("/role", async (request: Request, response: Response) => {
+router.post("/", async (request: Request, response: Response) => {
     try {
         const { body } = request;
         response.send(await createRole(body));
@@ -35,7 +35,7 @@ router.post("/role", async (request: Request, response: Response) => {
     }
 });
 
-router.patch("/role/:id", async (request: Request, response: Response) => {
+router.patch("/:id", async (request: Request, response: Response) => {
     try {
         const { id } = request.params;
         const { body } = request;
@@ -45,7 +45,7 @@ router.patch("/role/:id", async (request: Request, response: Response) => {
     }
 });
 
-router.delete("/role/:id", async (request: Request, response: Response) => {
+router.delete("/:id", async (request: Request, response: Response) => {
     try {
         const { id } = request.params;
         response.send(await deleteRole(id));
