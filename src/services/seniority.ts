@@ -1,5 +1,5 @@
 import prisma from "../client";
-import { Seniority, SeniorityData } from "../interfaces/Seniority";
+import { Seniority, SeniorityData } from "../types/Seniority";
 import { Status } from "../utils/constants";
 
 const prismaSeniorityModel = prisma.seniority;

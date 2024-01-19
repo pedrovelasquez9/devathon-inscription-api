@@ -1,5 +1,5 @@
 import prisma from "../client";
-import { Developer, DeveloperData } from "../interfaces/Developer";
+import { Developer, DeveloperData } from "../types/Developer";
 import { Status } from "../utils/constants";
 
 const prismaDeveloperModel = prisma.developer;

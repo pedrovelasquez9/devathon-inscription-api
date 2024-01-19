@@ -7,4 +7,5 @@ import { router as DeveloperInscriptionRoutes } from "./developer";
 
 export const router = express.Router();
 router.use("/roles", RoleRoutes);
-router.use(DocsRoutes, SeniorityRoutes, TeamRoutes, DeveloperInscriptionRoutes);
+router.use("/seniorities", SeniorityRoutes);
+router.use(DocsRoutes, TeamRoutes, DeveloperInscriptionRoutes);
