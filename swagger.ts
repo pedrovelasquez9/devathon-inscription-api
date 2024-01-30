@@ -1,13 +1,12 @@
 import swaggerAutogen from "swagger-autogen";
 const doc = {
     info: {
-        title: "Bookstore API",
-        description: "Bookstore boilerplate nodejs app",
+        title: "Devathon Inscription API",
+        description: "Devathon inscription backend API",
     },
     host: "localhost:3000",
     definitions: {
         developer: {
-            id: 1,
             fullname: "Pedro Plasencia",
             email: "pedro@pedro.com",
             github_link: "github.com",
@@ -27,13 +26,4 @@ const doc = {
 };
 
 const outputFile = "./docs/swagger-output.json";
-swaggerAutogen()(
-    outputFile,
-    [
-        "./src/routes/role.ts",
-        "./src/routes/seniority.ts",
-        "./src/routes/team.ts",
-        "./src/routes/developer.ts",
-    ],
-    doc,
-);
+swaggerAutogen()(outputFile, ["./src/routes/index.ts"], doc);

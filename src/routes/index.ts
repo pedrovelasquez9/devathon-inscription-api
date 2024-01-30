@@ -6,6 +6,10 @@ import { router as TeamRoutes } from "./team";
 import { router as DeveloperInscriptionRoutes } from "./developer";
 
 export const router = express.Router();
-router.use("/roles", RoleRoutes);
+router.use(
+    "/roles",
+    RoleRoutes
+    // #swagger.tags = ["Role"]
+);
 router.use("/seniorities", SeniorityRoutes);
 router.use(DocsRoutes, TeamRoutes, DeveloperInscriptionRoutes);

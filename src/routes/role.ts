@@ -1,14 +1,14 @@
 import { Router } from "express";
-import * as rolesComponent from "../components/role";
+import * as rolesController from "../controllers/role";
 
 export const router = Router();
 
-router.get("/", rolesComponent.getAllRoles);
+router.get("/", rolesController.getAllRoles);
 
-router.get("/:id", rolesComponent.getRoleById);
+router.get("/:id", rolesController.getRoleById);
 
-router.post("/", rolesComponent.createNewRole);
+router.post("/", rolesController.createNewRole);
 
-router.patch("/:id", rolesComponent.modifyRole);
+router.patch("/:id", rolesController.modifyRole);
 
-router.delete("/:id", rolesComponent.removeRole);
+router.delete("/:id", rolesController.removeRole);

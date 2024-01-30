@@ -1,8 +1,8 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Bookstore API",
-    "description": "Bookstore boilerplate nodejs app",
+    "title": "Devathon Inscription API",
+    "description": "Devathon inscription backend API",
     "version": "1.0.0"
   },
   "host": "localhost:3000",
@@ -11,7 +11,90 @@
     "http"
   ],
   "paths": {
-    "/": {
+    "/roles/": {
+      "get": {
+        "tags": [
+          "Role"
+        ],
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Role"
+        ],
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/roles/{id}": {
+      "get": {
+        "tags": [
+          "Role"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Role"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Role"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/seniorities/": {
       "get": {
         "description": "",
         "responses": {
@@ -29,7 +112,7 @@
         }
       }
     },
-    "/{id}": {
+    "/seniorities/{id}": {
       "get": {
         "description": "",
         "parameters": [
@@ -79,7 +162,7 @@
         }
       }
     },
-    "/team": {
+    "DocsRoutes/team": {
       "get": {
         "description": "",
         "responses": {
@@ -97,7 +180,7 @@
         }
       }
     },
-    "/team/{id}": {
+    "DocsRoutes/team/{id}": {
       "get": {
         "description": "",
         "parameters": [
@@ -147,7 +230,7 @@
         }
       }
     },
-    "/developer-inscription": {
+    "DocsRoutes/developer-inscription": {
       "get": {
         "tags": [
           "Developer"
@@ -155,7 +238,10 @@
         "description": "",
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/developer"
+            }
           }
         }
       },
@@ -177,11 +263,17 @@
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "201": {
+            "schema": {
+              "$ref": "#/definitions/developer"
+            },
+            "description": "Created"
           }
         }
       }
     },
-    "/developer-inscription/{id}": {
+    "DocsRoutes/developer-inscription/{id}": {
       "get": {
         "tags": [
           "Developer"
@@ -192,12 +284,16 @@
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "description": "Id of the record to search for"
           }
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/developer"
+            }
           }
         }
       },
@@ -211,12 +307,24 @@
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "description": "Id of the record to edit"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Add new developer inscription.",
+            "schema": {
+              "$ref": "#/definitions/developer"
+            }
           }
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/developer"
+            }
           }
         }
       },
@@ -230,7 +338,8 @@
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "description": "Id of the record to soft-delete"
           }
         ],
         "responses": {
@@ -245,10 +354,6 @@
     "developer": {
       "type": "object",
       "properties": {
-        "id": {
-          "type": "number",
-          "example": 1
-        },
         "fullname": {
           "type": "string",
           "example": "Pedro Plasencia"
