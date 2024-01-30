@@ -11,7 +11,8 @@ export const router = Router();
 
 router.get(
     "/developer-inscription",
-    async (request: Request, response: Response) => {
+    async (_request: Request, response: Response) => {
+        // #swagger.tags = ["Developer"]
         try {
             response.send(await getAllDevelopers());
         } catch (error) {
@@ -23,6 +24,7 @@ router.get(
 router.get(
     "/developer-inscription/:id",
     async (request: Request, response: Response) => {
+        // #swagger.tags = ["Developer"]
         try {
             const { id } = request.params;
             response.send(await getDeveloperByID(id));
@@ -35,6 +37,14 @@ router.get(
 router.post(
     "/developer-inscription",
     async (request: Request, response: Response) => {
+        /**
+         *  #swagger.tags = ["Developer"]
+            #swagger.parameters['body'] = {
+            in: 'body',
+            description: 'Add new developer inscription.',
+            schema: { $ref: '#/definitions/developer' }
+            }
+         */
         try {
             const { body } = request;
             response.send(await signUpDeveloper(body));
@@ -47,6 +57,7 @@ router.post(
 router.patch(
     "/developer-inscription/:id",
     async (request: Request, response: Response) => {
+        // #swagger.tags = ["Developer"]
         try {
             const { id } = request.params;
             const { body } = request;
@@ -60,6 +71,7 @@ router.patch(
 router.delete(
     "/developer-inscription/:id",
     async (request: Request, response: Response) => {
+        // #swagger.tags = ["Developer"]
         try {
             const { id } = request.params;
             response.send(await deleteDeveloperInscription(id));
