@@ -1,5 +1,5 @@
 import prisma from "../client";
-import { Team, TeamData } from "../interfaces/Team";
+import { Team, TeamData } from "../types/Team";
 import { Status } from "../utils/constants";
 
 const prismaTeamModel = prisma.team;

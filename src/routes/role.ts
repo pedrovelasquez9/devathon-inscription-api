@@ -1,55 +1,25 @@
-import { Router, Request, Response } from "express";
-import {
-    getAllRoles,
-    createRole,
-    editRole,
-    deleteRole,
-    getRoleByID,
-} from "../services/role";
+import { Router } from "express";
+import * as rolesController from "../controllers/role";
+import * as roleValidatorMiddleware from "../validators/role";
 
 export const router = Router();
 
-router.get("/role", async (request: Request, response: Response) => {
-    try {
-        response.send(await getAllRoles());
-    } catch (error) {
-        response.send(error);
-    }
-});
+router.get("/", rolesController.getAllRoles);
 
-router.get("/role/:id", async (request: Request, response: Response) => {
-    try {
-        const { id } = request.params;
-        response.send(await getRoleByID(id));
-    } catch (error) {
-        response.send("error");
-    }
-});
+router.get("/:id", rolesController.getRoleById);
 
-router.post("/role", async (request: Request, response: Response) => {
-    try {
-        const { body } = request;
-        response.send(await createRole(body));
-    } catch (error) {
-        response.send("error");
-    }
-});
+router.post(
+    "/",
+    roleValidatorMiddleware.usePostValidatorRules(),
+    roleValidatorMiddleware.validate,
+    rolesController.createNewRole
+);
 
-router.patch("/role/:id", async (request: Request, response: Response) => {
-    try {
-        const { id } = request.params;
-        const { body } = request;
-        response.send(await editRole(body, id));
-    } catch (error) {
-        response.send("error");
-    }
-});
+router.patch(
+    "/:id",
+    roleValidatorMiddleware.usePatchValidatorRules(),
+    roleValidatorMiddleware.validate,
+    rolesController.modifyRole
+);
 
-router.delete("/role/:id", async (request: Request, response: Response) => {
-    try {
-        const { id } = request.params;
-        response.send(await deleteRole(id));
-    } catch (error) {
-        response.send("error");
-    }
-});
+router.delete("/:id", rolesController.removeRole);

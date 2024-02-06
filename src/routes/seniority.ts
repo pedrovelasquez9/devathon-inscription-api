@@ -9,7 +9,7 @@ import {
 
 export const router = Router();
 
-router.get("/seniority", async (request: Request, response: Response) => {
+router.get("/", async (request: Request, response: Response) => {
     try {
         response.send(await getAllSeniorities());
     } catch (error) {
@@ -17,7 +17,7 @@ router.get("/seniority", async (request: Request, response: Response) => {
     }
 });
 
-router.get("/seniority/:id", async (request: Request, response: Response) => {
+router.get("/:id", async (request: Request, response: Response) => {
     try {
         const { id } = request.params;
         response.send(await getSeniorityByID(id));
@@ -26,7 +26,7 @@ router.get("/seniority/:id", async (request: Request, response: Response) => {
     }
 });
 
-router.post("/seniority", async (request: Request, response: Response) => {
+router.post("/", async (request: Request, response: Response) => {
     try {
         const { body } = request;
         response.send(await createSeniority(body));
@@ -35,7 +35,7 @@ router.post("/seniority", async (request: Request, response: Response) => {
     }
 });
 
-router.patch("/seniority/:id", async (request: Request, response: Response) => {
+router.patch("/:id", async (request: Request, response: Response) => {
     try {
         const { id } = request.params;
         const { body } = request;
@@ -45,14 +45,11 @@ router.patch("/seniority/:id", async (request: Request, response: Response) => {
     }
 });
 
-router.delete(
-    "/seniority/:id",
-    async (request: Request, response: Response) => {
-        try {
-            const { id } = request.params;
-            response.send(await deleteSeniority(id));
-        } catch (error) {
-            response.send("error");
-        }
-    },
-);
+router.delete("/:id", async (request: Request, response: Response) => {
+    try {
+        const { id } = request.params;
+        response.send(await deleteSeniority(id));
+    } catch (error) {
+        response.send("error");
+    }
+});

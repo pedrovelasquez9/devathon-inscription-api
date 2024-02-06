@@ -1,8 +1,8 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Bookstore API",
-    "description": "Bookstore boilerplate nodejs app",
+    "title": "Devathon Inscription API",
+    "description": "Devathon inscription backend API",
     "version": "1.0.0"
   },
   "host": "localhost:3000",
@@ -11,7 +11,90 @@
     "http"
   ],
   "paths": {
-    "/role": {
+    "/roles/": {
+      "get": {
+        "tags": [
+          "Role"
+        ],
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Role"
+        ],
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/roles/{id}": {
+      "get": {
+        "tags": [
+          "Role"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Role"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Role"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/seniorities/": {
       "get": {
         "description": "",
         "responses": {
@@ -29,7 +112,7 @@
         }
       }
     },
-    "/role/{id}": {
+    "/seniorities/{id}": {
       "get": {
         "description": "",
         "parameters": [
@@ -79,7 +162,7 @@
         }
       }
     },
-    "/seniority": {
+    "DocsRoutes/team": {
       "get": {
         "description": "",
         "responses": {
@@ -97,7 +180,7 @@
         }
       }
     },
-    "/seniority/{id}": {
+    "DocsRoutes/team/{id}": {
       "get": {
         "description": "",
         "parameters": [
@@ -147,71 +230,185 @@
         }
       }
     },
-    "/team": {
+    "DocsRoutes/developer-inscription": {
       "get": {
+        "tags": [
+          "Developer"
+        ],
         "description": "",
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/developer"
+            }
           }
         }
       },
       "post": {
+        "tags": [
+          "Developer"
+        ],
         "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Add new developer inscription.",
+            "schema": {
+              "$ref": "#/definitions/developer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "201": {
+            "schema": {
+              "$ref": "#/definitions/developer"
+            },
+            "description": "Created"
+          }
+        }
+      }
+    },
+    "DocsRoutes/developer-inscription/{id}": {
+      "get": {
+        "tags": [
+          "Developer"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Id of the record to search for"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/developer"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Developer"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Id of the record to edit"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Add new developer inscription.",
+            "schema": {
+              "$ref": "#/definitions/developer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/developer"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Developer"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Id of the record to soft-delete"
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK"
           }
         }
       }
-    },
-    "/team/{id}": {
-      "get": {
-        "description": "",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      },
-      "patch": {
-        "description": "",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      },
-      "delete": {
-        "description": "",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
+    }
+  },
+  "definitions": {
+    "developer": {
+      "type": "object",
+      "properties": {
+        "fullname": {
+          "type": "string",
+          "example": "Pedro Plasencia"
+        },
+        "email": {
+          "type": "string",
+          "example": "pedro@pedro.com"
+        },
+        "github_link": {
+          "type": "string",
+          "example": "github.com"
+        },
+        "linkedin_link": {
+          "type": "string",
+          "example": "linkedin.com"
+        },
+        "idrole": {
+          "type": "number",
+          "example": 1
+        },
+        "ceremony_available": {
+          "type": "number",
+          "example": 1
+        },
+        "discord_username": {
+          "type": "string",
+          "example": "pedro"
+        },
+        "idseniority": {
+          "type": "number",
+          "example": 1
+        },
+        "looking_for_work": {
+          "type": "number",
+          "example": 0
+        },
+        "retire_probability": {
+          "type": "number",
+          "example": 1
+        },
+        "condition_accepted": {
+          "type": "number",
+          "example": 1
+        },
+        "idteam": {
+          "type": "number",
+          "example": 1
+        },
+        "status": {
+          "type": "number",
+          "example": 1
+        },
+        "created_by": {
+          "type": "string",
+          "example": "01-01-2024"
         }
       }
     }

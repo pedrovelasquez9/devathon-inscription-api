@@ -1,6 +1,6 @@
 import { getAllBooks, createBook } from "../src/services/role";
 import { prismaMock } from "../prismaSingleton";
-import { Book } from "../src/interfaces/Book";
+import { Book } from "../src/types/Book";
 
 describe("tests books API services and it's integration with Prisma ORM", () => {
     it("should create a new Book record for the store", async () => {
