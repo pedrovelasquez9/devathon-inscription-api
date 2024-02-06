@@ -11,6 +11,10 @@ export const getRoleByID = async (id: string): Promise<RoleData | null> => {
 };
 
 export const createRole = async (roleData: Role): Promise<Role> => {
+    roleData = {
+        ...roleData,
+        created_by: process.env.DEFAULT_CREATOR_USER || ""
+    };
     return db.createRole(roleData);
 };
 
