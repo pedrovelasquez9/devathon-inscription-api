@@ -3,7 +3,7 @@ import { Developer, DeveloperData } from "../types/Developer";
 import { Status } from "../utils/constants";
 
 const prismaDeveloperModel = prisma.developer;
-const developerResultFields = {
+const inscriptionResultFields = {
     id: true,
     fullname: true,
     email: true,
@@ -16,14 +16,14 @@ const developerResultFields = {
     looking_for_work: true,
     retire_probability: true,
     condition_accepted: true,
-    idteam: true,
+    idteam: true
 };
 
-export const getAllDevelopers = async (): Promise<DeveloperData[]> => {
+export const getAllInscriptions = async (): Promise<DeveloperData[]> => {
     try {
         return await prismaDeveloperModel.findMany({
             where: { status: Status.Active },
-            select: developerResultFields,
+            select: inscriptionResultFields
         });
     } catch (error) {
         console.log(error);
@@ -31,17 +31,16 @@ export const getAllDevelopers = async (): Promise<DeveloperData[]> => {
     }
 };
 
-export const getDeveloperByID = async (
-    id: string,
+export const getInscriptionById = async (
+    id: number
 ): Promise<DeveloperData | null> => {
     try {
-        const developerRecordId = parseInt(id);
         return await prismaDeveloperModel.findUnique({
             where: {
-                id: developerRecordId,
-                status: Status.Active,
+                id,
+                status: Status.Active
             },
-            select: developerResultFields,
+            select: inscriptionResultFields
         });
     } catch (error) {
         console.log(error);
@@ -49,12 +48,12 @@ export const getDeveloperByID = async (
     }
 };
 
-export const signUpDeveloper = async (
-    developerData: Developer,
+export const createInscription = async (
+    inscriptionData: Developer
 ): Promise<Developer> => {
     try {
         return await prismaDeveloperModel.create({
-            data: developerData,
+            data: inscriptionData
         });
     } catch (error) {
         console.log(error);
@@ -62,17 +61,16 @@ export const signUpDeveloper = async (
     }
 };
 
-export const editDeveloperInscription = async (
-    developerData: Developer,
-    id: string,
+export const editInscription = async (
+    inscriptionData: Developer,
+    id: number
 ): Promise<Developer> => {
     try {
-        const recordId = parseInt(id);
         return await prismaDeveloperModel.update({
             where: {
-                id: recordId,
+                id
             },
-            data: developerData,
+            data: inscriptionData
         });
     } catch (error) {
         console.log(error);
@@ -80,18 +78,15 @@ export const editDeveloperInscription = async (
     }
 };
 
-export const deleteDeveloperInscription = async (
-    id: string,
-): Promise<Developer> => {
+export const deleteInscription = async (id: number): Promise<Developer> => {
     try {
-        const developerRecordId = parseInt(id);
         return await prismaDeveloperModel.update({
             where: {
-                id: developerRecordId,
+                id
             },
             data: {
-                status: Status.Inactive,
-            },
+                status: Status.Inactive
+            }
         });
     } catch (error) {
         console.log(error);

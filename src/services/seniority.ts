@@ -1,70 +1,39 @@
-import prisma from "../client";
 import { Seniority, SeniorityData } from "../types/Seniority";
-import { Status } from "../utils/constants";
-
-const prismaSeniorityModel = prisma.seniority;
-const seniorityResultFields = {
-    id: true,
-    name: true,
-};
+import * as db from "../db/seniority";
 
 export const getAllSeniorities = async (): Promise<SeniorityData[]> => {
-    try {
-        return await prismaSeniorityModel.findMany({
-            where: { status: Status.Active },
-            select: seniorityResultFields,
-        });
-    } catch (error) {
-        console.log(error);
-        throw error;
-    }
+    return db.getAllSeniorities();
 };
 
 export const getSeniorityByID = async (
-    id: string,
+    id: string
 ): Promise<SeniorityData | null> => {
     try {
         const seniorityRecordId = parseInt(id);
-        return await prismaSeniorityModel.findUnique({
-            where: {
-                id: seniorityRecordId,
-                status: Status.Active,
-            },
-            select: seniorityResultFields,
-        });
+        return db.getSeniorityById(seniorityRecordId);
     } catch (error) {
-        console.log(error);
         throw error;
     }
 };
 
 export const createSeniority = async (
-    SeniorityData: Seniority,
+    seniorityData: Seniority
 ): Promise<Seniority> => {
     try {
-        return await prismaSeniorityModel.create({
-            data: SeniorityData,
-        });
+        return db.createSeniority(seniorityData);
     } catch (error) {
-        console.log(error);
         throw error;
     }
 };
 
 export const editSeniority = async (
-    SeniorityData: Seniority,
-    id: string,
+    seniorityData: Seniority,
+    id: string
 ): Promise<Seniority> => {
     try {
         const recordId = parseInt(id);
-        return await prismaSeniorityModel.update({
-            where: {
-                id: recordId,
-            },
-            data: SeniorityData,
-        });
+        return db.editSeniority(seniorityData, recordId);
     } catch (error) {
-        console.log(error);
         throw error;
     }
 };
@@ -72,16 +41,8 @@ export const editSeniority = async (
 export const deleteSeniority = async (id: string): Promise<Seniority> => {
     try {
         const seniorityRecordId = parseInt(id);
-        return await prismaSeniorityModel.update({
-            where: {
-                id: seniorityRecordId,
-            },
-            data: {
-                status: Status.Inactive,
-            },
-        });
+        return db.deleteSeniority(seniorityRecordId);
     } catch (error) {
-        console.log(error);
         throw error;
     }
 };
