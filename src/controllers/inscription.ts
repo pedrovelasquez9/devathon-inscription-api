@@ -6,7 +6,7 @@ export const getAllInscriptions = async (
     response: Response
 ) => {
     try {
-        response.send(await inscriptionService.getAllDevelopers());
+        response.send(await inscriptionService.getAllInscriptions());
     } catch (error) {
         response.send(error);
     }
@@ -18,7 +18,7 @@ export const getInscriptionById = async (
 ) => {
     try {
         const { id } = request.params;
-        response.send(await inscriptionService.getDeveloperByID(id));
+        response.send(await inscriptionService.getInscriptionById(id));
     } catch (error) {
         response.send("error");
     }
@@ -30,7 +30,7 @@ export const createInscription = async (
 ) => {
     try {
         const { body } = request;
-        response.send(await inscriptionService.signUpDeveloper(body));
+        response.send(await inscriptionService.createInscription(body));
     } catch (error) {
         response.send("error");
     }
@@ -40,9 +40,7 @@ export const editInscription = async (request: Request, response: Response) => {
     try {
         const { id } = request.params;
         const { body } = request;
-        response.send(
-            await inscriptionService.editDeveloperInscription(body, id)
-        );
+        response.send(await inscriptionService.editInscription(body, id));
     } catch (error) {
         response.send("error");
     }
@@ -54,7 +52,7 @@ export const deleteInscription = async (
 ) => {
     try {
         const { id } = request.params;
-        response.send(await inscriptionService.deleteDeveloperInscription(id));
+        response.send(await inscriptionService.deleteInscription(id));
     } catch (error) {
         response.send("error");
     }

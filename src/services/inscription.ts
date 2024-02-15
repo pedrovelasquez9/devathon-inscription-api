@@ -65,9 +65,7 @@ export const editInscription = async (
     }
 };
 
-export const deleteDeveloperInscription = async (
-    id: string
-): Promise<Developer> => {
+export const deleteInscription = async (id: string): Promise<Developer> => {
     try {
         const inscriptionRecordId = parseInt(id);
         return db.deleteInscription(inscriptionRecordId);
