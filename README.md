@@ -43,8 +43,6 @@ This is a NodeJS project that will serve as the backend service for the Devathon
 
 ### TODO
 
--   Add controllers, service and db access layers
--   Improve routes naming handling
 -   Complete swagger schemas
 -   Add swagger config in readme instructions
 -   Centralize error handling
