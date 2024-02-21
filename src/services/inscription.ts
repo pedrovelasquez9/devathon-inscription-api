@@ -1,26 +1,7 @@
-import prisma from "../client";
-import { Developer, DeveloperData } from "../types/Developer";
-import { Status } from "../utils/constants";
+import { Inscription, InscriptionData } from "../types/Inscription";
 import * as db from "../db/inscription";
 
-const prismaDeveloperModel = prisma.developer;
-const developerResultFields = {
-    id: true,
-    fullname: true,
-    email: true,
-    github_link: true,
-    linkedin_link: true,
-    idrole: true,
-    ceremony_available: true,
-    discord_username: true,
-    idseniority: true,
-    looking_for_work: true,
-    retire_probability: true,
-    condition_accepted: true,
-    idteam: true
-};
-
-export const getAllInscriptions = async (): Promise<DeveloperData[]> => {
+export const getAllInscriptions = async (): Promise<InscriptionData[]> => {
     try {
         return db.getAllInscriptions();
     } catch (error) {
@@ -31,10 +12,10 @@ export const getAllInscriptions = async (): Promise<DeveloperData[]> => {
 
 export const getInscriptionById = async (
     id: string
-): Promise<DeveloperData | null> => {
+): Promise<InscriptionData | null> => {
     try {
-        const developerRecordId = parseInt(id);
-        return db.getInscriptionById(developerRecordId);
+        const InscriptionRecordId = parseInt(id);
+        return db.getInscriptionById(InscriptionRecordId);
     } catch (error) {
         console.log(error);
         throw error;
@@ -42,8 +23,8 @@ export const getInscriptionById = async (
 };
 
 export const createInscription = async (
-    inscriptionData: Developer
-): Promise<Developer> => {
+    inscriptionData: Inscription
+): Promise<Inscription> => {
     try {
         return db.createInscription(inscriptionData);
     } catch (error) {
@@ -53,9 +34,9 @@ export const createInscription = async (
 };
 
 export const editInscription = async (
-    inscriptionData: Developer,
+    inscriptionData: Inscription,
     id: string
-): Promise<Developer> => {
+): Promise<Inscription> => {
     try {
         const inscriptionRecordId = parseInt(id);
         return db.editInscription(inscriptionData, inscriptionRecordId);
@@ -65,7 +46,7 @@ export const editInscription = async (
     }
 };
 
-export const deleteInscription = async (id: string): Promise<Developer> => {
+export const deleteInscription = async (id: string): Promise<Inscription> => {
     try {
         const inscriptionRecordId = parseInt(id);
         return db.deleteInscription(inscriptionRecordId);

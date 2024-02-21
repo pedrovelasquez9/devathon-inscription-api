@@ -1,8 +1,8 @@
 import prisma from "../client";
-import { Developer, DeveloperData } from "../types/Developer";
+import { Inscription, InscriptionData } from "../types/Inscription";
 import { Status } from "../utils/constants";
 
-const prismaDeveloperModel = prisma.developer;
+const prismaInscriptionModel = prisma.inscription;
 const inscriptionResultFields = {
     id: true,
     fullname: true,
@@ -19,9 +19,9 @@ const inscriptionResultFields = {
     idteam: true
 };
 
-export const getAllInscriptions = async (): Promise<DeveloperData[]> => {
+export const getAllInscriptions = async (): Promise<InscriptionData[]> => {
     try {
-        return await prismaDeveloperModel.findMany({
+        return await prismaInscriptionModel.findMany({
             where: { status: Status.Active },
             select: inscriptionResultFields
         });
@@ -33,9 +33,9 @@ export const getAllInscriptions = async (): Promise<DeveloperData[]> => {
 
 export const getInscriptionById = async (
     id: number
-): Promise<DeveloperData | null> => {
+): Promise<InscriptionData | null> => {
     try {
-        return await prismaDeveloperModel.findUnique({
+        return await prismaInscriptionModel.findUnique({
             where: {
                 id,
                 status: Status.Active
@@ -49,10 +49,10 @@ export const getInscriptionById = async (
 };
 
 export const createInscription = async (
-    inscriptionData: Developer
-): Promise<Developer> => {
+    inscriptionData: Inscription
+): Promise<Inscription> => {
     try {
-        return await prismaDeveloperModel.create({
+        return await prismaInscriptionModel.create({
             data: inscriptionData
         });
     } catch (error) {
@@ -62,11 +62,11 @@ export const createInscription = async (
 };
 
 export const editInscription = async (
-    inscriptionData: Developer,
+    inscriptionData: Inscription,
     id: number
-): Promise<Developer> => {
+): Promise<Inscription> => {
     try {
-        return await prismaDeveloperModel.update({
+        return await prismaInscriptionModel.update({
             where: {
                 id
             },
@@ -78,9 +78,9 @@ export const editInscription = async (
     }
 };
 
-export const deleteInscription = async (id: number): Promise<Developer> => {
+export const deleteInscription = async (id: number): Promise<Inscription> => {
     try {
-        return await prismaDeveloperModel.update({
+        return await prismaInscriptionModel.update({
             where: {
                 id
             },

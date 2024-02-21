@@ -1,4 +1,4 @@
-import { Router, Request, Response } from "express";
+import { Router } from "express";
 import * as senioritiesController from "../controllers/seniority";
 
 export const router = Router();

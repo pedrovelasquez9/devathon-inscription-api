@@ -1,5 +1,4 @@
 import { Team, TeamData } from "../types/Team";
-import { Status } from "../utils/constants";
 import * as db from "../db/team";
 
 export const getAllTeams = async (): Promise<TeamData[]> => {
