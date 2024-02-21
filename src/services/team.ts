@@ -1,24 +1,9 @@
-import prisma from "../client";
 import { Team, TeamData } from "../types/Team";
-import { Status } from "../utils/constants";
-
-const prismaTeamModel = prisma.team;
-const teamResultFields = {
-    id: true,
-    name: true,
-    stack_backend: true,
-    stack_frontend: true,
-    available_backend_quota: true,
-    available_frontend_quota: true,
-    edition: true,
-};
+import * as db from "../db/team";
 
 export const getAllTeams = async (): Promise<TeamData[]> => {
     try {
-        return await prismaTeamModel.findMany({
-            where: { status: Status.Active },
-            select: teamResultFields,
-        });
+        return db.getAllTeams();
     } catch (error) {
         console.log(error);
         throw error;
@@ -28,13 +13,7 @@ export const getAllTeams = async (): Promise<TeamData[]> => {
 export const getTeamByID = async (id: string): Promise<TeamData | null> => {
     try {
         const teamRecordId = parseInt(id);
-        return await prismaTeamModel.findUnique({
-            where: {
-                id: teamRecordId,
-                status: Status.Active,
-            },
-            select: teamResultFields,
-        });
+        return db.getTeamByID(teamRecordId);
     } catch (error) {
         console.log(error);
         throw error;
@@ -43,9 +22,7 @@ export const getTeamByID = async (id: string): Promise<TeamData | null> => {
 
 export const createTeam = async (teamData: Team): Promise<Team> => {
     try {
-        return await prismaTeamModel.create({
-            data: teamData,
-        });
+        return db.createTeam(teamData);
     } catch (error) {
         console.log(error);
         throw error;
@@ -55,12 +32,7 @@ export const createTeam = async (teamData: Team): Promise<Team> => {
 export const editTeam = async (teamData: Team, id: string): Promise<Team> => {
     try {
         const recordId = parseInt(id);
-        return await prismaTeamModel.update({
-            where: {
-                id: recordId,
-            },
-            data: teamData,
-        });
+        return db.editTeam(teamData, recordId);
     } catch (error) {
         console.log(error);
         throw error;
@@ -70,14 +42,7 @@ export const editTeam = async (teamData: Team, id: string): Promise<Team> => {
 export const deleteTeam = async (id: string): Promise<Team> => {
     try {
         const teamRecordId = parseInt(id);
-        return await prismaTeamModel.update({
-            where: {
-                id: teamRecordId,
-            },
-            data: {
-                status: Status.Inactive,
-            },
-        });
+        return db.deleteTeam(teamRecordId);
     } catch (error) {
         console.log(error);
         throw error;

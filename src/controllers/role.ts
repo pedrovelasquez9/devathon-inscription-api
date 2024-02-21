@@ -1,7 +1,7 @@
 import * as roleService from "../services/role";
 import { Request, Response } from "express";
 
-export const getAllRoles = async (request: Request, response: Response) => {
+export const getAllRoles = async (_request: Request, response: Response) => {
     try {
         response.send(await roleService.getAllRoles());
     } catch (error) {

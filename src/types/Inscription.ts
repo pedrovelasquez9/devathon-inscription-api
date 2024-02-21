@@ -1,6 +1,6 @@
 import { Tracking } from "./Tracking";
 
-export type DeveloperData = {
+export type InscriptionData = {
     id: number;
     fullname: string;
     email: string;
@@ -17,4 +17,4 @@ export type DeveloperData = {
     status?: number;
 };
 
-export type Developer = Tracking & DeveloperData;
+export type Inscription = Tracking & InscriptionData;
